@@ -1,0 +1,15 @@
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/AppTest.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/CSSLocators.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/ClosingSpecificWindow.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/ConditionalMethods.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/ExplicitWaitDemo.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/FirstTestCase.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/FluentWaitDemo.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/GetMethods.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/HandleBrowserWindow.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/ImplicitWaitDemo.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/LocatorsDemo.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/NavigationalCommands.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/SleepCommand.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/XPathAxesDemo.java
+/home/kyan/Code/selenium/my-selenium-project/src/test/java/com/mycompany/app/XPathDemo.java
