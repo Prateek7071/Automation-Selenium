@@ -1,12 +1,38 @@
 package com.mycompany.app;
 
 import java.time.Duration;
+import java.time.Month;
+import java.util.HashMap;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DatePickerDemo1{
+
+ static Month ChangeMonth(String month){
+     HashMap<String,Month> monthanator = new HashMap<String,Month>();
+     monthanator.put("January", Month.JANUARY);
+     monthanator.put("February",Month.FEBRUARY);
+     monthanator.put("March",Month.MARCH);
+     monthanator.put("April", Month.APRIL);
+     monthanator.put("May", Month.MAY);
+     monthanator.put("June", Month.JUNE);
+     monthanator.put("July", Month.JULY);
+     monthanator.put("August", Month.AUGUST);
+     monthanator.put("September", Month.SEPTEMBER);
+     monthanator.put("October", Month.OCTOBER);
+     monthanator.put("November",Month.NOVEMBER);
+     monthanator.put("December",Month.DECEMBER);
+     
+     Month expMonth = monthanator.get(month);
+     if(expMonth==null){
+         System.out.println("Invalid arg");
+     }
+     
+     return expMonth;
+ }
+ 
  public static void main(String[] args) {
      WebDriver driver=new ChromeDriver();
      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -18,67 +44,84 @@ public class DatePickerDemo1{
      
      // method 2: using date picker
      String TDate= "03" ;
-     String TMonth="January";
-     String TYear="2025";
+     String TMonth="March";
+     String TYear="2026";
      
      driver.findElement(By.xpath("//input[@id='datepicker']")).click();
      
-     while(true){
-        String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
-        String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
-        if(Month.equals(TMonth) && Year.equals(TYear)){
-         break;
-        }
-        driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
-     }
-     driver.findElement(By.xpath("//a[normalize-space()="+TDate+"]")).click();
-     //Below is the implementation of smart picker with a bug that month is MAY, JUNE and not 5,6 so need to find numerical value corresponding to months then compare so yeah but the logic is there for the other parts!
-     // also add break statements inside loop when necessary!
- //     int aMonth = Integer.parseInt(driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText());
- //     int aYear = Integer.parseInt(driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText());
- //     int bMonth = Integer.parseInt(TMonth);
- //     int bYear = Integer.parseInt(TYear);
+     //this below part if for manual like only goes forward or backward
+     // while(true){
+     //    String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+     //    String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+     //    if(Month.equals(TMonth) && Year.equals(TYear)){
+     //     break;
+     //    }
+     //    driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
+     // }
+     //method 1 for date
+     // driver.findElement(By.xpath("//a[normalize-space()="+TDate+"]")).click();
+     //method 2 for date
+     //select the date
+     // List<WebElement> allDates=driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']//tbody//td//a"));
+     // for(WebElement dt:allDates)
+     // {
+     //     if(dt.getText().equals(TDate))
+     //     {
+     //         dt.click();
+     //         break;
+     //     }
+     // }
+
      
- //     if(aYear>bYear){
- //             while(true){
- //                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
- //                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
- //                if(Month.equals(TMonth) && Year.equals(TYear)){
- //                 break;
- //                }
- //                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
- //             }
- //     }else if(aYear<bYear){
- //         while(true){
- //            String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
- //            String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
- //            if(Month.equals(TMonth) && Year.equals(TYear)){
- //             break;
- //            }
- //            driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
- //         }
- //     }else if(aYear == bYear){
- //         if(aMonth>bMonth){
- //             while(true){
- //                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
- //                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
- //                if(Month.equals(TMonth) && Year.equals(TYear)){
- //                 break;
- //                }
- //                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
- //             }
- //         }else if(bMonth>aMonth){
- //             while(true){
- //                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
- //                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
- //                if(Month.equals(TMonth) && Year.equals(TYear)){
- //                 break;
- //                }
- //                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
- //             }
- //     }
- //     }
+     String aMonth = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+     
+     Month currMonth = ChangeMonth(aMonth);
+     Month expMonth = ChangeMonth(TMonth);
+     
+     int aYear = Integer.parseInt(driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText());
+     int bYear = Integer.parseInt(TYear);
+     
+     int result = expMonth.compareTo(currMonth); // returns 0 <0 and >0
+     if(aYear>bYear){
+             while(true){
+                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+                if(Month.equals(TMonth) && Year.equals(TYear)){
+                 break;
+                }
+                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
+             }
+     }else if(aYear<bYear){
+         while(true){
+            String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+            String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+            if(Month.equals(TMonth) && Year.equals(TYear)){
+             break;
+            }
+            driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
+         }
+     }else if(aYear == bYear){
+         if(result<0){
+             while(true){
+                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+                if(Month.equals(TMonth) && Year.equals(TYear)){
+                 break;
+                }
+                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-w']")).click();
+             }
+         }else if(result>0){
+             while(true){
+                String Month = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+                String Year = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+                if(Month.equals(TMonth) && Year.equals(TYear)){
+                 break;
+                }
+                driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
+             }
+         }
+     }
     
- //     driver.findElement(By.xpath("//a[normalize-space()="+TDate+"]")).click();
+     driver.findElement(By.xpath("//a[normalize-space()="+TDate+"]")).click();
  }
 }
