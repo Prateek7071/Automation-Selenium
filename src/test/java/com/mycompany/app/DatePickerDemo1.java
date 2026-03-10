@@ -33,6 +33,7 @@ public class DatePickerDemo1{
      }
      driver.findElement(By.xpath("//a[normalize-space()="+TDate+"]")).click();
      //Below is the implementation of smart picker with a bug that month is MAY, JUNE and not 5,6 so need to find numerical value corresponding to months then compare so yeah but the logic is there for the other parts!
+     // also add break statements inside loop when necessary!
  //     int aMonth = Integer.parseInt(driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText());
  //     int aYear = Integer.parseInt(driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText());
  //     int bMonth = Integer.parseInt(TMonth);
